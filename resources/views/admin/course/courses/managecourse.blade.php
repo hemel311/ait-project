@@ -1,0 +1,83 @@
+@extends('admin.master')
+@section('title')
+    Manage Course || AIT
+@endsection
+@section('body')
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="page-heading">
+                                <h1 class="page-title">Course</h1>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{route('home')}}"><i class="la la-home font-20"></i></a>
+                                    </li>
+                                    <li class="breadcrumb-item">Course </li>
+                                </ol>
+                            </div>
+                            <div class="page-content fade-in-up">
+                                <div class="ibox">
+                                    <div class="ibox-head">
+                                        <div class="ibox-title">Course </div>
+                                    </div>
+                                    <div class="ibox-body">
+                                        <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>Sl NO.</th>
+                                                <th>Course Category</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Course Image</th>
+                                                <th>Course Price</th>
+                                                <th>Course Duration</th>
+                                                <th>Instructor</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Sl NO.</th>
+                                                <th>Course Category</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Course Image</th>
+                                                <th>Course Price</th>
+                                                <th>Course Duration</th>
+                                                <th>Instructor</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </tfoot>
+                                            <tbody>
+                                            @foreach($courses as $course)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$course->category->name}}</td>
+                                                    <td>{{$course->name}}</td>
+                                                    <td>{{$course->shortdescription}}</td>
+                                                    <td><img src="{{asset($course->image)}}" alt="" width="50px" height="50px"></td>
+                                                    <td>{{$course->price}}</td>
+                                                    <td>{{$course->duration}}</td>
+                                                    <td>{{$course->instructor->name}}</td>
+                                                    <td> {{$course->status==1?'Published':'Unpublished'}}</td>
+                                                    <td><a href="{{route('editcourse',['id'=>$course->id])}}" class="btn btn-outline-warning">Edit</a>
+                                                        <a href="{{route('deletecourse',['id'=>$course->id])}}" class="btn btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</a></td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
